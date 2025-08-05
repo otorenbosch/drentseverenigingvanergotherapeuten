@@ -3,9 +3,8 @@ praktijken:
   - naam: "Ergotherapie in Drenthe"
     logo: "/assets/images/praktijken/ergotherapie-in-drenthe-logo.png"
     website: "https://www.ergotherapiedrenthe.nl/"
-    regio: "Zweelo en omstreken"
+    regio: "Zweeloo en omstreken"
     specialisatie: "Volwassenen en kinderen"
-    beschrijving: "Gespecialiseerd in neurologische revalidatie en ADL training."
     coordinaten:
       lat: 52.7952563
       lng: 6.7282738
@@ -15,7 +14,6 @@ praktijken:
     website: "https://ergotherapieroorda.nl/"
     regio: "Hoogeveen"
     specialisatie: "Kinderen"
-    beschrijving: "Kinderfysiotherapie en ontwikkelingsstimulering."
     coordinaten:
       lat: 52.7158451
       lng: 6.4986021
@@ -25,7 +23,6 @@ praktijken:
     website: "https://fytac.nl"  
     regio: "Meppel"
     specialisatie: "Volwassenen"
-    beschrijving: "Focus op werkplekergonomie en handtherapie."
     coordinaten:
       lat: 52.6941668
       lng: 6.189204

@@ -50,10 +50,24 @@ $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
   color: $primary-color;
 }
 
-// Logo styling
+// Logo styling - SPECIFIEKERE SELECTORS
+.masthead .site-title .site-logo img {
+  max-height: 120px !important; // !important om andere CSS te overschrijven
+  height: 120px !important;
+  width: auto !important;
+}
+
 .site-logo img {
-  max-height: 80px; // Was 60px, nu groter
-  width: auto;
+  max-height: 120px !important;
+  height: 120px !important;
+  width: auto !important;
+}
+
+// Extra specifieke selector voor als het logo anders wordt ingeladen
+img[src*="dve-logo"] {
+  max-height: 120px !important;
+  height: 120px !important;
+  width: auto !important;
 }
 
 .site-title {
@@ -61,6 +75,6 @@ $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
   align-items: center;
   
   .site-logo {
-    margin-right: 15px; // Meer ruimte tussen logo en tekst
+    margin-right: 20px; // Iets meer ruimte tussen logo en tekst
   }
 }
