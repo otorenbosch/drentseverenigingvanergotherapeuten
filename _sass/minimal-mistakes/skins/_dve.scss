@@ -1,0 +1,66 @@
+/* ==========================================================================
+   DVE (Drentse Vereniging van Ergotherapeuten) skin
+   ========================================================================== */
+
+/* Colors */
+$background-color: #fff !default;
+$text-color: #333 !default;
+$primary-color: #2E5A87 !default; // Donkerblauw uit logo
+$border-color: mix(#fff, $text-color, 75%) !default;
+$footer-background-color: #2E5A87 !default;
+$link-color: #4A9B9B !default; // Turquoise uit logo
+$masthead-link-color: #fff !default; // Witte links in groene header
+$masthead-link-color-hover: #fff !default;
+$navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
+
+// Groene header/masthead
+.masthead {
+  background-color: #7CB342 !important; // Groen uit logo
+  border-bottom: 1px solid darken(#7CB342, 10%);
+  margin-bottom: 0 !important; // Geen witte ruimte onder header
+  padding-bottom: 1em !important;
+  
+  .site-title a {
+    color: #fff !important; // Witte titel tekst
+  }
+  
+  .greedy-nav {
+    background: transparent !important; // Transparante nav achtergrond
+  }
+}
+
+// Ook de navigatie container aanpassen
+.greedy-nav__toggle {
+  background: transparent !important;
+}
+
+.page__footer {
+  color: #fff !important; // Witte tekst in footer
+}
+
+.greedy-nav a {
+  color: #fff !important; // Witte navigatie tekst
+  
+  &:hover {
+    color: #f0f0f0 !important; // Licht grijs bij hover
+  }
+}
+
+.page__title {
+  color: $primary-color;
+}
+
+// Logo styling
+.site-logo img {
+  max-height: 80px; // Was 60px, nu groter
+  width: auto;
+}
+
+.site-title {
+  display: flex;
+  align-items: center;
+  
+  .site-logo {
+    margin-right: 15px; // Meer ruimte tussen logo en tekst
+  }
+}

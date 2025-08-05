@@ -1,0 +1,33 @@
+# Praktijken gegevens
+praktijken:
+  - naam: "Ergotherapie Assen"
+    logo: "/assets/images/praktijken/assen-logo.png"
+    website: "https://ergotherapie-assen.nl"
+    regio: "Assen"
+    specialisatie: "Volwassenen en kinderen"
+    beschrijving: "Gespecialiseerd in neurologische revalidatie en ADL training."
+    coordinaten:
+      lat: 52.9925
+      lng: 6.5649
+    
+  - naam: "Praktijk Hoogeveen"
+    logo: "/assets/images/praktijken/hoogeveen-logo.png" 
+    website: "https://praktijk-hoogeveen.nl"
+    regio: "Hoogeveen"
+    specialisatie: "Kinderen"
+    beschrijving: "Kinderfysiotherapie en ontwikkelingsstimulering."
+    coordinaten:
+      lat: 52.7265
+      lng: 6.4783
+      
+  - naam: "Ergo Emmen"
+    logo: "/assets/images/praktijken/emmen-logo.png"
+    website: "https://ergo-emmen.nl"  
+    regio: "Emmen"
+    specialisatie: "Volwassenen"
+    beschrijving: "Focus op werkplekergonomie en handtherapie."
+    coordinaten:
+      lat: 52.7794
+      lng: 6.9095
+
+# Voeg hier meer praktijken toe...

@@ -1,9 +1,16 @@
-main:
-  - title: "Posts"
-    url: /posts/
-  - title: "Categories"
-    url: /categories/
-  - title: "Tags"
-    url: /tags/
-  - title: "About"
-    url: /about/
+# sidebar links (left navigation)  
+docs:
+  - title: "Navigatie"
+    children:
+      - title: "Home"
+        url: /
+      - title: "Wat is ergotherapie"
+        url: /wat-is-ergotherapie/
+      - title: "Over ons"
+        url: /over-ons/
+      - title: "Missie en visie"
+        url: /missie-en-visie/
+      - title: "Aangesloten praktijken"
+        url: /aangesloten-ergotherapiepraktijken/
+      - title: "Contact"
+        url: /contact/
