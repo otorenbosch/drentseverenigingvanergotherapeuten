@@ -7,16 +7,14 @@ sidebar:
   nav: "docs"
 ---
 
+<!-- Leaflet CSS toevoegen -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
 <div class="praktijken-container">
   <!-- Kaart sectie -->
   <div class="kaart-sectie">
     <h2>Praktijken in Drenthe</h2>
-    <div id="drenthe-kaart" class="drenthe-kaart">
-      <!-- Interactieve kaart komt hier -->
-      <div class="kaart-placeholder">
-        <p>Interactieve kaart wordt geladen...</p>
-      </div>
-    </div>
+    <div id="drenthe-kaart" class="drenthe-kaart"></div>
   </div>
 
   <!-- Praktijken lijst -->
@@ -44,84 +42,117 @@ sidebar:
   </div>
 </div>
 
+<!-- Leaflet JS toevoegen -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- Kaart Initialisatie Script -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Initialiseer kaart met middelpunt Drenthe
+  var kaart = L.map('drenthe-kaart').setView([52.9, 6.6], 9);
+
+  // Voeg OpenStreetMap tegel toe
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap-bijdragers'
+  }).addTo(kaart);
+
+  // Voeg markers toe met logo's
+  {% for praktijk in site.data.praktijken.praktijken %}
+    {% if praktijk.coordinaten %}
+      var logoIcon = L.icon({
+        iconUrl: '{{ praktijk.logo }}',
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+        popupAnchor: [0, -40]
+      });
+
+      L.marker([{{ praktijk.coordinaten.lat }}, {{ praktijk.coordinaten.lng }}], {icon: logoIcon})
+        .addTo(kaart)
+        .bindPopup("<strong>{{ praktijk.naam }}</strong><br>{{ praktijk.regio }}");
+    {% endif %}
+  {% endfor %}
+});
+</script>
+
 <style>
 .praktijken-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-top: 2rem;
+  grid-template-columns: 3fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: start;
 }
 
 .drenthe-kaart {
-  height: 500px;
-  background: #f5f5f5;
-  border: 1px solid #ddd;
+  height: 700px;
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 1px solid #ccc;
+  overflow: hidden;
 }
 
-.praktijk-card {
-  display: flex;
-  background: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: box-shadow 0.3s ease;
+/* Ultra compacte praktijkkaartjes */
+.praktijken-lijst .praktijk-info h3 {
+  font-size: 0.75rem;
+  margin: 0 0 0.1rem 0;
+  line-height: 1.1;
 }
 
-.praktijk-card:hover {
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+.praktijken-lijst .praktijk-info p {
+  font-size: 0.65rem;
+  margin: 0.05rem 0;
+  line-height: 1.1;
 }
 
-.praktijk-logo {
-  flex-shrink: 0;
-  margin-right: 1rem;
+.praktijken-lijst .praktijk-info {
+  flex: 1;
 }
 
-.praktijk-logo img {
-  width: 80px;
-  height: 80px;
+.praktijken-lijst .praktijk-link {
+  font-size: 0.65rem;
+  padding: 0.15rem 0.3rem;
+  margin-top: 0.15rem;
+  display: inline-block;
+  background: #4A9B9B;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.praktijken-lijst .praktijk-link:hover {
+  background: #2E5A87;
+}
+
+/* Logo klein */
+.praktijken-lijst .praktijk-logo img {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.3rem;
   object-fit: contain;
   border-radius: 4px;
 }
 
-.praktijk-info h3 {
-  color: #2E5A87;
-  margin-bottom: 0.5rem;
+/* Card zelf compacter */
+.praktijk-card {
+  padding: 0.3rem;
+  margin-bottom: 0.3rem;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
 }
 
-.praktijk-link {
-  display: inline-block;
-  background: #4A9B9B;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  text-decoration: none;
-  margin-top: 0.5rem;
-}
-
-.praktijk-link:hover {
-  background: #2E5A87;
-  color: white;
-}
-
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .praktijken-container {
     grid-template-columns: 1fr;
   }
-  
+
   .praktijk-card {
     flex-direction: column;
-    text-align: center;
+    align-items: flex-start;
   }
-  
+
   .praktijk-logo {
-    margin-right: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
 }
 </style>

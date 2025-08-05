@@ -1,33 +1,33 @@
 # Praktijken gegevens
 praktijken:
-  - naam: "Ergotherapie Assen"
-    logo: "/assets/images/praktijken/assen-logo.png"
-    website: "https://ergotherapie-assen.nl"
-    regio: "Assen"
+  - naam: "Ergotherapie in Drenthe"
+    logo: "/assets/images/praktijken/ergotherapie-in-drenthe-logo.png"
+    website: "https://www.ergotherapiedrenthe.nl/"
+    regio: "Zweelo en omstreken"
     specialisatie: "Volwassenen en kinderen"
     beschrijving: "Gespecialiseerd in neurologische revalidatie en ADL training."
     coordinaten:
-      lat: 52.9925
-      lng: 6.5649
+      lat: 52.7952563
+      lng: 6.7282738
     
-  - naam: "Praktijk Hoogeveen"
-    logo: "/assets/images/praktijken/hoogeveen-logo.png" 
-    website: "https://praktijk-hoogeveen.nl"
+  - naam: "Ergotherapie Roorda"
+    logo: "/assets/images/praktijken/roorda-logo.png" 
+    website: "https://ergotherapieroorda.nl/"
     regio: "Hoogeveen"
     specialisatie: "Kinderen"
     beschrijving: "Kinderfysiotherapie en ontwikkelingsstimulering."
     coordinaten:
-      lat: 52.7265
-      lng: 6.4783
+      lat: 52.7158451
+      lng: 6.4986021
       
-  - naam: "Ergo Emmen"
-    logo: "/assets/images/praktijken/emmen-logo.png"
-    website: "https://ergo-emmen.nl"  
-    regio: "Emmen"
+  - naam: "Fytac"
+    logo: "/assets/images/praktijken/fytac-logo.png"
+    website: "https://fytac.nl"  
+    regio: "Meppel"
     specialisatie: "Volwassenen"
     beschrijving: "Focus op werkplekergonomie en handtherapie."
     coordinaten:
-      lat: 52.7794
-      lng: 6.9095
+      lat: 52.6941668
+      lng: 6.189204
 
 # Voeg hier meer praktijken toe...
