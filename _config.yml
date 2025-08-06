@@ -116,7 +116,13 @@ compress_html:
   ignore:
     envs: development
 
-# Defaults
+# Collections voor Decap CMS
+collections:
+  bestuur:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults (GEFIXTE VERSIE - slechts één defaults sectie)
 defaults:
   # _pages
   - scope:
@@ -125,17 +131,6 @@ defaults:
     values:
       layout: single
       author_profile: false
-      sidebar:
-        nav: "docs"
-
-# Collections voor Decap CMS (alleen bestuur)
-collections:
-  bestuur:
-    output: true
-    permalink: /:collection/:name/
-
-# Defaults voor nieuwe collections
-defaults:
   # _bestuur  
   - scope:
       path: "_bestuur"
@@ -143,5 +138,3 @@ defaults:
     values:
       layout: single
       author_profile: false
-      sidebar:
-        nav: "docs"

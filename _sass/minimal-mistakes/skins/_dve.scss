@@ -77,4 +77,96 @@ img[src*="dve-logo"] {
   .site-logo {
     margin-right: 20px; // Iets meer ruimte tussen logo en tekst
   }
+  
+  // Verberg de tekstuele titel - alleen logo tonen
+  .site-title-text {
+    display: none !important;
+  }
+}
+
+// Als er geen aparte class is, verberg alle tekst in site-title behalve logo
+.masthead .site-title {
+  font-size: 0 !important; // Verberg tekstinhoud
+  
+  .site-logo {
+    font-size: 1rem !important; // Reset font-size voor logo container
+  }
+}
+
+/* ==========================================================================
+   Navigation Override - Altijd alle menu items tonen
+   ========================================================================== */
+
+.greedy-nav {
+  .visible-links {
+    display: flex !important;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    
+    a {
+      display: block !important;
+      margin: 0 0.5rem;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      
+      @media (max-width: 768px) {
+        font-size: 0.85rem;
+        margin: 0 0.25rem;
+        padding: 0.4rem 0.5rem;
+      }
+    }
+  }
+  
+  .hidden-links {
+    display: none !important;
+  }
+  
+  .greedy-nav__toggle {
+    display: none !important;
+  }
+}
+
+/* Responsive aanpassingen voor kleine schermen */
+@media (max-width: 640px) {
+  .greedy-nav .visible-links {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #7CB342;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    min-width: 200px;
+    
+    a {
+      display: block !important;
+      width: 100%;
+      text-align: right;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin: 0;
+      
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+/* Zorg dat er genoeg ruimte is voor alle links */
+.masthead {
+  .site-title {
+    flex: 0 0 auto;
+    max-width: 200px; // Veel kleiner nu we alleen logo tonen
+    
+    @media (max-width: 1024px) {
+      max-width: 150px;
+    }
+  }
+  
+  .greedy-nav {
+    flex: 1;
+    min-width: 0;
+  }
 }

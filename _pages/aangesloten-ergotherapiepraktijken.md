@@ -3,8 +3,6 @@ permalink: /aangesloten-ergotherapiepraktijken/
 title: "Aangesloten ergotherapiepraktijken"
 layout: single
 author_profile: false
-sidebar:
-  nav: "docs"
 ---
 
 <!-- Leaflet CSS toevoegen -->
