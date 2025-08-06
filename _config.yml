@@ -138,3 +138,7 @@ defaults:
     values:
       layout: single
       author_profile: false
+
+# Custom JavaScript
+after_footer_scripts:
+  - /assets/js/mobile-nav.js
