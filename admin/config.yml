@@ -2,7 +2,6 @@ backend:
   name: github
   repo: otorenbosch/drentseverenigingvanergotherapeuten
   branch: main
-  # Optional: base_url voor custom OAuth server (niet nodig voor GitHub)
 
 media_folder: "assets/images/uploads"
 public_folder: "/assets/images/uploads"
@@ -50,6 +49,16 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
           - {label: "Author Profile", name: "author_profile", widget: "hidden", default: false}
           - {label: "Inhoud", name: "body", widget: "markdown"}
+      
+      - label: "Aangesloten praktijken"
+        name: "aangesloten-ergotherapiepraktijken"
+        file: "_pages/aangesloten-ergotherapiepraktijken.md"
+        fields:
+          - {label: "Permalink", name: "permalink", widget: "hidden", default: "/aangesloten-ergotherapiepraktijken/"}
+          - {label: "Titel", name: "title", widget: "string"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
+          - {label: "Author Profile", name: "author_profile", widget: "hidden", default: false}
+          - {label: "Inhoud", name: "body", widget: "markdown"}
 
   - name: "praktijken_data"
     label: "Praktijken beheer"
@@ -76,21 +85,6 @@ collections:
                 fields:
                   - {label: "Latitude", name: "lat", widget: "number", value_type: "float", step: 0.000001}
                   - {label: "Longitude", name: "lng", widget: "number", value_type: "float", step: 0.000001}
-
-  - name: "nieuws"
-    label: "Nieuwsberichten"
-    folder: "_posts"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - {label: "Titel", name: "title", widget: "string"}
-      - {label: "Publicatiedatum", name: "date", widget: "datetime"}
-      - {label: "Auteur", name: "author", widget: "string", default: "DVE Bestuur"}
-      - {label: "Categorieën", name: "categories", widget: "list", default: ["nieuws"]}
-      - {label: "Tags", name: "tags", widget: "list", required: false}
-      - {label: "Featured image", name: "header_image", widget: "image", required: false}
-      - {label: "Excerpt", name: "excerpt", widget: "text", hint: "Korte samenvatting voor overzichtspagina's", required: false}
-      - {label: "Inhoud", name: "body", widget: "markdown"}
 
   - name: "bestuur"
     label: "Bestuur"
