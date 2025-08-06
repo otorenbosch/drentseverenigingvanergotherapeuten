@@ -1,6 +1,8 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: otorenbosch/drentseverenigingvanergotherapeuten
   branch: main
+  # Optional: base_url voor custom OAuth server (niet nodig voor GitHub)
 
 media_folder: "assets/images/uploads"
 public_folder: "/assets/images/uploads"
