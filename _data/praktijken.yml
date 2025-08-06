@@ -1,7 +1,7 @@
 # Praktijken gegevens
 praktijken:
   - naam: "Ergotherapie in Drenthe"
-    logo: "/assets/images/praktijken/ergotherapie-in-drenthe-logo.png"
+    logo: "/assets/images/ergotherapie-in-drenthe-logo.png"
     website: "https://www.ergotherapiedrenthe.nl/"
     regio: "Zweeloo en omstreken"
     specialisatie: "Volwassenen en kinderen"
@@ -10,7 +10,7 @@ praktijken:
       lng: 6.7282738
     
   - naam: "Ergotherapie Roorda"
-    logo: "/assets/images/praktijken/roorda-logo.png" 
+    logo: "/assets/images/roorda-logo.png" 
     website: "https://ergotherapieroorda.nl/"
     regio: "Hoogeveen"
     specialisatie: "Kinderen"
@@ -19,7 +19,7 @@ praktijken:
       lng: 6.4986021
       
   - naam: "Fytac"
-    logo: "/assets/images/praktijken/fytac-logo.png"
+    logo: "/assets/images/fytac-logo.png"
     website: "https://fytac.nl"  
     regio: "Meppel"
     specialisatie: "Volwassenen"
