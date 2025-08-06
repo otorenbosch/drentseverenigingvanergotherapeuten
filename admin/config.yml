@@ -49,16 +49,6 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
           - {label: "Author Profile", name: "author_profile", widget: "hidden", default: false}
           - {label: "Inhoud", name: "body", widget: "markdown"}
-      
-      - label: "Aangesloten praktijken"
-        name: "aangesloten-ergotherapiepraktijken"
-        file: "_pages/aangesloten-ergotherapiepraktijken.md"
-        fields:
-          - {label: "Permalink", name: "permalink", widget: "hidden", default: "/aangesloten-ergotherapiepraktijken/"}
-          - {label: "Titel", name: "title", widget: "string"}
-          - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
-          - {label: "Author Profile", name: "author_profile", widget: "hidden", default: false}
-          - {label: "Inhoud", name: "body", widget: "markdown"}
 
   - name: "praktijken_data"
     label: "Praktijken beheer"
@@ -85,18 +75,3 @@ collections:
                 fields:
                   - {label: "Latitude", name: "lat", widget: "number", value_type: "float", step: 0.000001}
                   - {label: "Longitude", name: "lng", widget: "number", value_type: "float", step: 0.000001}
-
-  - name: "bestuur"
-    label: "Bestuur"
-    folder: "_bestuur"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Naam", name: "title", widget: "string"}
-      - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
-      - {label: "Functie", name: "functie", widget: "select", options: ["Voorzitter", "Secretaris", "Penningmeester", "Bestuurslid"]}
-      - {label: "Email", name: "email", widget: "string", required: false}
-      - {label: "Telefoon", name: "telefoon", widget: "string", required: false}
-      - {label: "Foto", name: "foto", widget: "image", required: false}
-      - {label: "Volgorde", name: "order", widget: "number", default: 1, hint: "Bepaalt de volgorde op de pagina"}
-      - {label: "Bio", name: "body", widget: "markdown", required: false}
