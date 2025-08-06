@@ -6,14 +6,6 @@ backend:
 media_folder: "assets/images"
 public_folder: "/assets/images"
 
-# Editor configuratie voor betere gebruikerservaring
-editor:
-  preview: true
-
-# Display URL voor betere preview
-display_url: https://drentseverenigingvanergotherapeuten.netlify.app
-site_url: https://drentseverenigingvanergotherapeuten.netlify.app
-
 collections:
   - name: "pages"
     label: "Pagina's"
@@ -26,13 +18,7 @@ collections:
           - {label: "Titel", name: "title", widget: "string"}
           - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
           - {label: "Author Profile", name: "author_profile", widget: "hidden", default: false}
-          - label: "Inhoud"
-            name: "body"
-            widget: "markdown"
-            modes: ["rich_text", "raw"]
-            buttons: ["bold", "italic", "link", "heading-two", "heading-three", "bulleted-list", "numbered-list"]
-            editor_components: []
-            sanitize_preview: true
+          - {label: "Inhoud", name: "body", widget: "markdown"}
       
       - label: "Wat is ergotherapie"
         name: "wat-is-ergotherapie"
@@ -42,13 +28,7 @@ collections:
           - {label: "Titel", name: "title", widget: "string"}
           - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
           - {label: "Author Profile", name: "author_profile", widget: "hidden", default: false}
-          - label: "Inhoud"
-            name: "body"
-            widget: "markdown"
-            modes: ["rich_text", "raw"]
-            buttons: ["bold", "italic", "link", "heading-two", "heading-three", "bulleted-list", "numbered-list"]
-            editor_components: []
-            sanitize_preview: true
+          - {label: "Inhoud", name: "body", widget: "markdown"}
       
       - label: "Over ons"
         name: "over-ons"
@@ -58,13 +38,7 @@ collections:
           - {label: "Titel", name: "title", widget: "string"}
           - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
           - {label: "Author Profile", name: "author_profile", widget: "hidden", default: false}
-          - label: "Inhoud"
-            name: "body"
-            widget: "markdown"
-            modes: ["rich_text", "raw"]
-            buttons: ["bold", "italic", "link", "heading-two", "heading-three", "bulleted-list", "numbered-list"]
-            editor_components: []
-            sanitize_preview: true
+          - {label: "Inhoud", name: "body", widget: "markdown"}
       
       - label: "Missie en visie"
         name: "missie-en-visie"
@@ -74,13 +48,7 @@ collections:
           - {label: "Titel", name: "title", widget: "string"}
           - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
           - {label: "Author Profile", name: "author_profile", widget: "hidden", default: false}
-          - label: "Inhoud"
-            name: "body"
-            widget: "markdown"
-            modes: ["rich_text", "raw"]
-            buttons: ["bold", "italic", "link", "heading-two", "heading-three", "bulleted-list", "numbered-list"]
-            editor_components: []
-            sanitize_preview: true
+          - {label: "Inhoud", name: "body", widget: "markdown"}
 
   - name: "praktijken_data"
     label: "Praktijken beheer"
@@ -98,7 +66,6 @@ collections:
               - {label: "Website", name: "website", widget: "string", required: false, hint: "Volledige URL inclusief https://"}
               - {label: "Regio", name: "regio", widget: "string", hint: "Bijv. Hoogeveen, Meppel, Assen"}
               - {label: "Specialisatie", name: "specialisatie", widget: "string", hint: "Bijv. Kinderen, Volwassenen, Neurologie"}
-              - {label: "Beschrijving", name: "beschrijving", widget: "text", required: false, hint: "Korte beschrijving van de praktijk"}
               - label: "Coördinaten"
                 name: "coordinaten"
                 widget: "object"
