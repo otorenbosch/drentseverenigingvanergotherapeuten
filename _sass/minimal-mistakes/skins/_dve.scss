@@ -17,27 +17,27 @@ $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
 .masthead {
   background-color: #7CB342 !important; // Groen uit logo
   border-bottom: 1px solid darken(#7CB342, 10%);
-  margin-bottom: 0 !important; // Geen witte ruimte onder header
+  margin-bottom: 0 !important;
   padding: 1em 0 !important;
   
   .site-title a {
-    color: #fff !important; // Witte titel tekst
+    color: #fff !important;
   }
   
   .greedy-nav {
-    background: transparent !important; // Transparante nav achtergrond
+    background: transparent !important;
   }
 }
 
 .page__footer {
-  color: #fff !important; // Witte tekst in footer
+  color: #fff !important;
 }
 
 .greedy-nav a {
-  color: #fff !important; // Witte navigatie tekst
+  color: #fff !important;
   
   &:hover {
-    color: #f0f0f0 !important; // Licht grijs bij hover
+    color: #f0f0f0 !important;
   }
 }
 
@@ -45,10 +45,9 @@ $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
   color: $primary-color;
 }
 
-// Logo styling - alleen logo, geen tekst
+// Logo styling - alleen logo tonen
 .site-logo img {
   max-height: 80px !important;
-  height: auto !important;
   width: auto !important;
 }
 
@@ -64,169 +63,79 @@ $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
 }
 
 /* ==========================================================================
-   Responsive Navigation
+   Mobile Navigation Fixes
    ========================================================================== */
 
-// Desktop navigatie
-@media (min-width: 769px) {
-  .greedy-nav {
-    .visible-links {
-      display: flex !important;
-      justify-content: flex-end;
-      align-items: center;
-      
-      .masthead__menu-item a {
-        display: block;
-        margin: 0 0.5rem;
-        padding: 0.5rem 0.75rem;
-        font-size: 0.9rem;
-        white-space: nowrap;
-        color: #fff !important;
-        text-decoration: none;
-        border-radius: 4px;
-        transition: background-color 0.2s ease;
-        
-        &:hover {
-          background-color: rgba(255,255,255,0.1);
-          color: #fff !important;
-        }
-      }
-    }
-    
-    .hidden-links {
-      display: none !important;
-    }
-    
-    .greedy-nav__toggle {
-      display: none !important;
-    }
-  }
-}
-
-// Mobiele navigatie
-@media (max-width: 768px) {
-  .masthead {
-    .site-title {
-      flex: 1;
-      
-      .site-logo img {
-        max-height: 60px !important;
-      }
-    }
+// Zorg dat toggle button zichtbaar is op mobiel
+.greedy-nav__toggle {
+  display: none;
+  background: transparent !important;
+  border: 2px solid #fff !important;
+  border-radius: 4px !important;
+  padding: 0.5rem !important;
+  color: #fff !important;
+  
+  &:hover {
+    background: rgba(255,255,255,0.1) !important;
   }
   
-  .greedy-nav {
-    position: relative;
+  .navicon,
+  .navicon:before,
+  .navicon:after {
+    background: #fff !important;
+  }
+  
+  .navicon {
+    width: 1rem;
+    height: 0.125rem;
     
-    .visible-links {
-      display: none !important;
-    }
-    
-    .greedy-nav__toggle {
-      display: block !important;
-      background: transparent !important;
-      border: 2px solid #fff !important;
-      border-radius: 4px;
-      padding: 0.5rem !important;
-      color: #fff !important;
-      font-size: 1rem;
-      cursor: pointer;
-      
-      &:hover {
-        background: rgba(255,255,255,0.1) !important;
-      }
-      
-      .navicon,
-      .navicon:before,
-      .navicon:after {
-        background: #fff !important;
-        transition: all 0.2s ease;
-      }
-      
-      .navicon {
-        display: block;
-        width: 20px;
-        height: 2px;
-        position: relative;
-        
-        &:before,
-        &:after {
-          content: "";
-          display: block;
-          width: 100%;
-          height: 2px;
-          position: absolute;
-          left: 0;
-        }
-        
-        &:before {
-          top: -6px;
-        }
-        
-        &:after {
-          bottom: -6px;
-        }
-      }
-    }
-    
-    .hidden-links {
-      display: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background: #7CB342 !important;
-      border-radius: 0 0 8px 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      min-width: 200px;
-      z-index: 1000;
-      margin-top: 10px;
-      
-      &.hidden {
-        display: none !important;
-      }
-      
-      &:not(.hidden) {
-        display: block !important;
-      }
-      
-      .masthead__menu-item a {
-        display: block !important;
-        padding: 0.75rem 1rem !important;
-        color: #fff !important;
-        text-decoration: none !important;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-        font-size: 0.9rem;
-        
-        &:hover {
-          background: rgba(255,255,255,0.1) !important;
-        }
-        
-        &:last-child {
-          border-bottom: none;
-          border-radius: 0 0 8px 8px;
-        }
-        
-        &:first-child {
-          border-top: 1px solid rgba(255,255,255,0.1);
-        }
-      }
+    &:before,
+    &:after {
+      width: 1rem;
+      height: 0.125rem;
     }
   }
 }
 
-// Extra kleine schermen
+// Hidden links styling
+.greedy-nav .hidden-links {
+  background: #7CB342 !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 0 0 8px 8px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+  
+  a {
+    color: #fff !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+    
+    &:hover {
+      background: rgba(255,255,255,0.1) !important;
+      color: #fff !important;
+    }
+    
+    &:last-child {
+      border-bottom: none !important;
+    }
+  }
+}
+
+// Responsive breakpoints
+@media (max-width: 768px) {
+  .masthead .site-logo img {
+    max-height: 60px !important;
+  }
+  
+  .greedy-nav__toggle {
+    display: block !important;
+  }
+}
+
 @media (max-width: 480px) {
   .masthead {
     padding: 0.75em 0 !important;
-    
-    .site-title .site-logo img {
-      max-height: 50px !important;
-    }
   }
   
-  .greedy-nav .hidden-links {
-    right: 1rem;
-    min-width: calc(100vw - 2rem);
-    max-width: 280px;
+  .masthead .site-logo img {
+    max-height: 50px !important;
   }
 }
