@@ -72,7 +72,7 @@ collections:
             widget: "list"
             fields:
               - {label: "Praktijknaam", name: "naam", widget: "string"}
-              - {label: "Logo", name: "logo", widget: "string", hint: "Pad naar logo bestand, bijv. /assets/images/praktijken/logo.png"}
+              - {label: "Logo", name: "logo", widget: "image", hint: "Pad naar logo bestand, bijv. /assets/images/logo.png"}
               - {label: "Website", name: "website", widget: "string", required: false, hint: "Volledige URL inclusief https://"}
               - {label: "Regio", name: "regio", widget: "string", hint: "Bijv. Hoogeveen, Meppel, Assen"}
               - {label: "Specialisatie", name: "specialisatie", widget: "string", hint: "Bijv. Kinderen, Volwassenen, Neurologie"}
