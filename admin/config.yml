@@ -6,6 +6,14 @@ backend:
 media_folder: "assets/images"
 public_folder: "/assets/images"
 
+# Editor configuratie voor betere gebruikerservaring
+editor:
+  preview: true
+
+# Display URL voor betere preview
+display_url: https://drentseverenigingvanergotherapeuten.netlify.app
+site_url: https://drentseverenigingvanergotherapeuten.netlify.app
+
 collections:
   - name: "pages"
     label: "Pagina's"
@@ -18,7 +26,13 @@ collections:
           - {label: "Titel", name: "title", widget: "string"}
           - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
           - {label: "Author Profile", name: "author_profile", widget: "hidden", default: false}
-          - {label: "Inhoud", name: "body", widget: "markdown"}
+          - label: "Inhoud"
+            name: "body"
+            widget: "markdown"
+            modes: ["rich_text", "raw"]
+            buttons: ["bold", "italic", "link", "heading-two", "heading-three", "bulleted-list", "numbered-list"]
+            editor_components: []
+            sanitize_preview: true
       
       - label: "Wat is ergotherapie"
         name: "wat-is-ergotherapie"
@@ -28,7 +42,13 @@ collections:
           - {label: "Titel", name: "title", widget: "string"}
           - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
           - {label: "Author Profile", name: "author_profile", widget: "hidden", default: false}
-          - {label: "Inhoud", name: "body", widget: "markdown"}
+          - label: "Inhoud"
+            name: "body"
+            widget: "markdown"
+            modes: ["rich_text", "raw"]
+            buttons: ["bold", "italic", "link", "heading-two", "heading-three", "bulleted-list", "numbered-list"]
+            editor_components: []
+            sanitize_preview: true
       
       - label: "Over ons"
         name: "over-ons"
@@ -38,7 +58,13 @@ collections:
           - {label: "Titel", name: "title", widget: "string"}
           - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
           - {label: "Author Profile", name: "author_profile", widget: "hidden", default: false}
-          - {label: "Inhoud", name: "body", widget: "markdown"}
+          - label: "Inhoud"
+            name: "body"
+            widget: "markdown"
+            modes: ["rich_text", "raw"]
+            buttons: ["bold", "italic", "link", "heading-two", "heading-three", "bulleted-list", "numbered-list"]
+            editor_components: []
+            sanitize_preview: true
       
       - label: "Missie en visie"
         name: "missie-en-visie"
@@ -48,7 +74,13 @@ collections:
           - {label: "Titel", name: "title", widget: "string"}
           - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
           - {label: "Author Profile", name: "author_profile", widget: "hidden", default: false}
-          - {label: "Inhoud", name: "body", widget: "markdown"}
+          - label: "Inhoud"
+            name: "body"
+            widget: "markdown"
+            modes: ["rich_text", "raw"]
+            buttons: ["bold", "italic", "link", "heading-two", "heading-three", "bulleted-list", "numbered-list"]
+            editor_components: []
+            sanitize_preview: true
 
   - name: "praktijken_data"
     label: "Praktijken beheer"
