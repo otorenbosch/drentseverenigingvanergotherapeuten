@@ -1,0 +1,106 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+collections:
+  - name: "pages"
+    label: "Pagina's"
+    files:
+      - label: "Homepage"
+        name: "index"
+        file: "_pages/index.md"
+        fields:
+          - {label: "Permalink", name: "permalink", widget: "hidden", default: "/"}
+          - {label: "Titel", name: "title", widget: "string"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
+          - {label: "Author Profile", name: "author_profile", widget: "hidden", default: false}
+          - {label: "Inhoud", name: "body", widget: "markdown"}
+      
+      - label: "Wat is ergotherapie"
+        name: "wat-is-ergotherapie"
+        file: "_pages/wat-is-ergotherapie.md"
+        fields:
+          - {label: "Permalink", name: "permalink", widget: "hidden", default: "/wat-is-ergotherapie/"}
+          - {label: "Titel", name: "title", widget: "string"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
+          - {label: "Author Profile", name: "author_profile", widget: "hidden", default: false}
+          - {label: "Inhoud", name: "body", widget: "markdown"}
+      
+      - label: "Over ons"
+        name: "over-ons"
+        file: "_pages/over-ons.md"
+        fields:
+          - {label: "Permalink", name: "permalink", widget: "hidden", default: "/over-ons/"}
+          - {label: "Titel", name: "title", widget: "string"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
+          - {label: "Author Profile", name: "author_profile", widget: "hidden", default: false}
+          - {label: "Inhoud", name: "body", widget: "markdown"}
+      
+      - label: "Missie en visie"
+        name: "missie-en-visie"
+        file: "_pages/missie-en-visie.md"
+        fields:
+          - {label: "Permalink", name: "permalink", widget: "hidden", default: "/missie-en-visie/"}
+          - {label: "Titel", name: "title", widget: "string"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
+          - {label: "Author Profile", name: "author_profile", widget: "hidden", default: false}
+          - {label: "Inhoud", name: "body", widget: "markdown"}
+
+  - name: "praktijken_data"
+    label: "Praktijken beheer"
+    files:
+      - label: "Aangesloten praktijken"
+        name: "praktijken"
+        file: "_data/praktijken.yml"
+        fields:
+          - label: "Praktijken"
+            name: "praktijken"
+            widget: "list"
+            fields:
+              - {label: "Praktijknaam", name: "naam", widget: "string"}
+              - {label: "Logo", name: "logo", widget: "string", hint: "Pad naar logo bestand, bijv. /assets/images/praktijken/logo.png"}
+              - {label: "Website", name: "website", widget: "string", required: false, hint: "Volledige URL inclusief https://"}
+              - {label: "Regio", name: "regio", widget: "string", hint: "Bijv. Hoogeveen, Meppel, Assen"}
+              - {label: "Specialisatie", name: "specialisatie", widget: "string", hint: "Bijv. Kinderen, Volwassenen, Neurologie"}
+              - {label: "Beschrijving", name: "beschrijving", widget: "text", required: false, hint: "Korte beschrijving van de praktijk"}
+              - label: "Coördinaten"
+                name: "coordinaten"
+                widget: "object"
+                required: false
+                hint: "Voor de kaart - gebruik https://www.latlong.net/ om coördinaten te vinden"
+                fields:
+                  - {label: "Latitude", name: "lat", widget: "number", value_type: "float", step: 0.000001}
+                  - {label: "Longitude", name: "lng", widget: "number", value_type: "float", step: 0.000001}
+
+  - name: "nieuws"
+    label: "Nieuwsberichten"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Titel", name: "title", widget: "string"}
+      - {label: "Publicatiedatum", name: "date", widget: "datetime"}
+      - {label: "Auteur", name: "author", widget: "string", default: "DVE Bestuur"}
+      - {label: "Categorieën", name: "categories", widget: "list", default: ["nieuws"]}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Featured image", name: "header_image", widget: "image", required: false}
+      - {label: "Excerpt", name: "excerpt", widget: "text", hint: "Korte samenvatting voor overzichtspagina's", required: false}
+      - {label: "Inhoud", name: "body", widget: "markdown"}
+
+  - name: "bestuur"
+    label: "Bestuur"
+    folder: "_bestuur"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Naam", name: "title", widget: "string"}
+      - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
+      - {label: "Functie", name: "functie", widget: "select", options: ["Voorzitter", "Secretaris", "Penningmeester", "Bestuurslid"]}
+      - {label: "Email", name: "email", widget: "string", required: false}
+      - {label: "Telefoon", name: "telefoon", widget: "string", required: false}
+      - {label: "Foto", name: "foto", widget: "image", required: false}
+      - {label: "Volgorde", name: "order", widget: "number", default: 1, hint: "Bepaalt de volgorde op de pagina"}
+      - {label: "Bio", name: "body", widget: "markdown", required: false}

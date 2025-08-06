@@ -127,3 +127,21 @@ defaults:
       author_profile: false
       sidebar:
         nav: "docs"
+
+# Collections voor Decap CMS (alleen bestuur)
+collections:
+  bestuur:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults voor nieuwe collections
+defaults:
+  # _bestuur  
+  - scope:
+      path: "_bestuur"
+      type: bestuur
+    values:
+      layout: single
+      author_profile: false
+      sidebar:
+        nav: "docs"
