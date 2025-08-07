@@ -4,13 +4,17 @@ title: Missie en visie
 layout: single
 author_profile: false
 ---
-Missie:
+**Missie:**
+
+
 De Drentse Vereniging van Ergotherapeuten (DVE) zet zich in voor het versterken,
 verbinden en vertegenwoordigen van ergotherapeuten in Drenthe. Wij bevorderen de
 kwaliteit en zichtbaarheid van ergotherapie door kennisdeling, samenwerking en
-belangenbehartiging zodat inwoners van Drenthe..........
+belangenbehartiging zodat inwoners van Drenthe.
 
-Visie:
+**Visie:**
+
+
 De Drentse Vereniging van Ergotherapeuten (DVE) streeft naar een toekomst waarin
 ergotherapie in Drenthe een vanzelfsprekende en toegankelijke zorgvorm is, die integraal
 deel uitmaakt van het regionale zorgnetwerk. We willen het aanspreekpunt zijn voor 
