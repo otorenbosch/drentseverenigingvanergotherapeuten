@@ -15,8 +15,8 @@ $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
 
 // Groene header/masthead
 .masthead {
-  background-color: #7CB342 !important; // Groen uit logo
-  border-bottom: 1px solid darken(#7CB342, 10%);
+  background-color: #2E5A87 !important;
+  border-bottom: 1px solid darken(#2E5A87, 10%);
   margin-bottom: 0 !important;
   padding: 1em 0 !important;
   
@@ -99,7 +99,7 @@ $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
 
 // Hidden links styling
 .greedy-nav .hidden-links {
-  background: #7CB342 !important;
+  background: #2E5A87 !important;
   border: 1px solid rgba(255,255,255,0.1) !important;
   border-radius: 0 0 8px 8px !important;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
