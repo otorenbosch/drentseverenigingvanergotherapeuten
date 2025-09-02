@@ -33,6 +33,11 @@ $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
   color: #fff !important;
 }
 
+.page__footer-copyright,
+.page__footer-follow {
+  display: none !important;
+}
+
 .greedy-nav a {
   color: #fff !important;
   

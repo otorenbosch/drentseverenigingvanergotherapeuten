@@ -31,10 +31,6 @@ author:
 
 # Site Footer
 footer:
-  links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:info@ergotherapeuten-drenthe.nl"
 
 # Reading Files
 include:
