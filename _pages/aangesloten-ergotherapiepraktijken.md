@@ -8,49 +8,38 @@ author_profile: false
 <!-- Leaflet CSS toevoegen -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-<div class="praktijken-container">
-  <!-- Kaart sectie -->
-  <div class="kaart-sectie">
-    <h2>Praktijken in Drenthe</h2>
-    <div id="drenthe-kaart" class="drenthe-kaart"></div>
-  </div>
+*"Professionele ergotherapie door heel Drenthe"*
 
-  <!-- Praktijken lijst -->
-  <div class="praktijken-sectie">
-    <h2>Onze aangesloten praktijken</h2>
-    
-    <div class="praktijken-grid">
-      {% for praktijk in site.data.praktijken.praktijken %}
-      <div class="praktijk-card" data-lat="{{ praktijk.coordinaten.lat }}" data-lng="{{ praktijk.coordinaten.lng }}">
-        <div class="praktijk-header">
-          <div class="praktijk-logo">
-            {% if praktijk.logo %}
-              <img src="{{ praktijk.logo }}" alt="{{ praktijk.naam }} logo">
-            {% else %}
-              <div class="praktijk-placeholder">{{ praktijk.naam | slice: 0 }}</div>
-            {% endif %}
-          </div>
-          <div class="praktijk-title">
-            <h3>{{ praktijk.naam }}</h3>
-            <p class="regio">{{ praktijk.regio }}</p>
-          </div>
-        </div>
-        
-        <div class="praktijk-details">
-          <p class="specialisatie">{{ praktijk.specialisatie }}</p>
-        </div>
-        
-        <div class="praktijk-actions">
-          {% if praktijk.website %}
-            <a href="{{ praktijk.website }}" target="_blank" class="praktijk-link">
-              <i class="fas fa-external-link-alt"></i> Website
-            </a>
-          {% endif %}
-        </div>
+<div class="map-container">
+  <div id="drenthe-kaart" class="drenthe-kaart"></div>
+</div>
+<div class="praktijken-grid">
+  {% for praktijk in site.data.praktijken.praktijken %}
+  <div class="praktijk-card" data-lat="{{ praktijk.coordinaten.lat }}" data-lng="{{ praktijk.coordinaten.lng }}">
+    <div class="praktijk-header">
+      {% if praktijk.logo %}
+        <img src="{{ praktijk.logo }}" alt="{{ praktijk.naam }}" class="praktijk-logo">
+      {% else %}
+        <div class="praktijk-logo-placeholder">{{ praktijk.naam | slice: 0 }}</div>
+      {% endif %}
+      <div class="praktijk-info">
+        <h3>{{ praktijk.naam }}</h3>
+        <p class="praktijk-location">{{ praktijk.regio }}</p>
+        <span class="praktijk-specialisatie">{{ praktijk.specialisatie }}</span>
       </div>
-      {% endfor %}
+    </div>
+    <div class="praktijk-actions">
+      {% if praktijk.website %}
+        <a href="{{ praktijk.website }}" target="_blank" class="btn btn-small">
+          <i class="fas fa-external-link-alt"></i> Website
+        </a>
+      {% endif %}
+      <button class="btn btn-small btn-secondary show-on-map" data-lat="{{ praktijk.coordinaten.lat }}" data-lng="{{ praktijk.coordinaten.lng }}">
+        <i class="fas fa-map-marker-alt"></i> Toon op kaart
+      </button>
     </div>
   </div>
+  {% endfor %}
 </div>
 
 <!-- Leaflet JS toevoegen -->
@@ -59,11 +48,11 @@ author_profile: false
 <!-- Kaart Initialisatie Script -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  // Initialiseer kaart met middelpunt Drenthe - GEEN scroll zoom
+  // Initialiseer kaart met middelpunt Drenthe
   var kaart = L.map('drenthe-kaart', {
     scrollWheelZoom: false,
-    doubleClickZoom: false,
-    touchZoom: false,
+    doubleClickZoom: true,
+    touchZoom: true,
     dragging: true
   }).setView([52.9, 6.6], 9);
 
@@ -72,82 +61,284 @@ document.addEventListener("DOMContentLoaded", function () {
     attribution: '&copy; OpenStreetMap-bijdragers'
   }).addTo(kaart);
 
-  // Custom marker icoon - terug naar poppetjes
+  // Custom marker icoon
   var customIcon = L.divIcon({
     className: 'custom-marker',
     html: '<div class="marker-pin"><i class="fas fa-user-md"></i></div>',
-    iconSize: [30, 40],
-    iconAnchor: [15, 40],
-    popupAnchor: [0, -40]
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
   });
 
-  // Voeg markers toe met logo's in popup
+  // Sla markers op voor referentie
+  var markers = {};
+
+  // Voeg markers toe
   {% for praktijk in site.data.praktijken.praktijken %}
     {% if praktijk.coordinaten %}
-      L.marker([{{ praktijk.coordinaten.lat }}, {{ praktijk.coordinaten.lng }}], {icon: customIcon})
+      var marker = L.marker([{{ praktijk.coordinaten.lat }}, {{ praktijk.coordinaten.lng }}], {icon: customIcon})
         .addTo(kaart)
         .bindPopup(`
-          <div class="popup-content">
-            <div class="popup-header">
+          <div style="min-width: 200px;">
+            <div style="display: flex; align-items: center; margin-bottom: 10px; gap: 10px;">
               {% if praktijk.logo %}
-                <img src="{{ praktijk.logo }}" alt="{{ praktijk.naam }}" class="popup-logo">
+                <img src="{{ praktijk.logo }}" alt="{{ praktijk.naam }}" style="width: 40px; height: 40px; object-fit: contain; border-radius: 6px; border: 1px solid #e2e8f0; background: white;">
               {% else %}
-                <div class="popup-logo-placeholder">{{ praktijk.naam | slice: 0 }}</div>
+                <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #7CB342, #689f38); color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold;">{{ praktijk.naam | slice: 0 }}</div>
               {% endif %}
-              <div class="popup-info">
-                <h4>{{ praktijk.naam }}</h4>
-                <p class="popup-regio">{{ praktijk.regio }}</p>
+              <div>
+                <h4 style="margin: 0 0 4px 0; color: #2E5A87; font-size: 14px;">{{ praktijk.naam }}</h4>
+                <p style="margin: 0; color: #666; font-size: 12px;">{{ praktijk.regio }}</p>
               </div>
             </div>
-            <p><strong>Specialisatie:</strong> {{ praktijk.specialisatie }}</p>
+            <p style="margin: 6px 0; font-size: 12px;"><strong>Specialisatie:</strong> {{ praktijk.specialisatie }}</p>
             {% if praktijk.website %}
-              <a href="{{ praktijk.website }}" target="_blank" class="popup-link">
-                <i class="fas fa-external-link-alt"></i> Bezoek website
+              <a href="{{ praktijk.website }}" target="_blank" style="display: inline-flex; align-items: center; margin-top: 8px; padding: 4px 8px; background: linear-gradient(135deg, #4A9B9B, #3A8A8A); color: white; text-decoration: none; border-radius: 4px; font-size: 11px; gap: 4px;">
+                <i class="fas fa-external-link-alt"></i> Website
               </a>
             {% endif %}
           </div>
         `);
+        
+      // Sla marker op met coordinaten als sleutel
+      markers['{{ praktijk.coordinaten.lat }}_{{ praktijk.coordinaten.lng }}'] = marker;
     {% endif %}
   {% endfor %}
+
+  // Voeg event listeners toe voor "Toon op kaart" buttons
+  document.querySelectorAll('.show-on-map').forEach(function(button) {
+    button.addEventListener('click', function() {
+      var lat = this.dataset.lat;
+      var lng = this.dataset.lng;
+      var markerKey = lat + '_' + lng;
+      
+      if (markers[markerKey]) {
+        // Pan naar marker en open popup
+        kaart.setView([lat, lng], 12);
+        markers[markerKey].openPopup();
+        
+        // Scroll naar kaart (smooth)
+        document.getElementById('drenthe-kaart').scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'center'
+        });
+      }
+    });
+  });
 });
 </script>
 
 <style>
-/* Container layout */
-.praktijken-container {
-  display: block;
-  max-width: 1200px;
-  margin: 1rem auto 0 auto;
+/* DVE Style Variables */
+:root {
+    --primary-color: #2E5A87;
+    --secondary-color: #4A9B9B;
+    --accent-color: #7CB342;
+    --text-color: #333333;
+    --text-light: #666666;
+    --bg-color: #ffffff;
+    --bg-alt: #f8fafc;
+    --border-color: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --border-radius: 12px;
 }
 
-.kaart-sectie {
-  margin-bottom: 3rem;
-}
-
-.praktijken-sectie {
-  margin-top: 2rem;
-}
-
-/* Kaart styling */
-.drenthe-kaart {
-  height: 500px;
-  width: 100%;
-  border-radius: 12px;
-  border: 2px solid #e1e8ed;
+.map-container {
+  background: white;
+  border-radius: var(--border-radius);
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  margin: 2rem auto;
+  max-width: 1400px;
+  width: 100%;
 }
 
-/* Custom marker styling - terug naar poppetjes */
+.drenthe-kaart {
+  height: 600px;
+  width: 100%;
+}
+
+/* DVE Praktijken Section - 3 column layout */
+.praktijken-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.praktijk-card {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  height: 100%;
+}
+
+.praktijk-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
+}
+
+.praktijk-header {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0.75rem;
+}
+
+.praktijk-logo {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background: white;
+  flex-shrink: 0;
+}
+
+.praktijk-logo-placeholder {
+  width: 35px;
+  height: 35px;
+  background: linear-gradient(135deg, var(--accent-color), #689f38);
+  color: white;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.praktijk-info h3 {
+  color: var(--primary-color);
+  margin-bottom: 0.2rem;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.praktijk-location {
+  color: var(--text-light);
+  margin-bottom: 0;
+  font-size: 0.5rem;
+}
+
+.praktijk-specialisatie {
+  display: block;
+  background: linear-gradient(135deg, var(--secondary-color), #3a8a8a);
+  color: white;
+  padding: 0.08rem 0.25rem;
+  border-radius: 6px;
+  font-size: 0.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05px;
+  margin-top: 0.2rem;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.praktijk-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-shrink: 0;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+/* Override Jekyll theme button styles completely */
+.praktijk-actions .btn,
+.praktijk-actions a.btn,
+.praktijk-actions button.btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 0.2rem 0.4rem !important;
+  border-radius: 3px !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  font-size: 0.65rem !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border: none !important;
+  cursor: pointer !important;
+  gap: 0.2rem !important;
+  margin: 0 !important;
+  min-height: auto !important;
+  line-height: 1.2 !important;
+  box-shadow: none !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  white-space: nowrap !important;
+}
+
+.praktijk-actions .btn-small,
+.praktijk-actions a.btn-small,
+.praktijk-actions button.btn-small {
+  padding: 0.2rem 0.4rem !important;
+  font-size: 0.6rem !important;
+}
+
+.praktijk-actions .btn:not(.btn-secondary),
+.praktijk-actions a.btn:not(.btn-secondary),
+.praktijk-actions button.btn:not(.btn-secondary) {
+  background: linear-gradient(135deg, #2E5A87, #1e4a77) !important;
+  color: white !important;
+}
+
+.praktijk-actions .btn:not(.btn-secondary):hover,
+.praktijk-actions a.btn:not(.btn-secondary):hover,
+.praktijk-actions button.btn:not(.btn-secondary):hover {
+  background: linear-gradient(135deg, #1e4a77, #2E5A87) !important;
+  color: white !important;
+  text-decoration: none !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+.praktijk-actions .btn-secondary,
+.praktijk-actions a.btn-secondary,
+.praktijk-actions button.btn-secondary {
+  background: linear-gradient(135deg, #4A9B9B, #3a8a8a) !important;
+  color: white !important;
+}
+
+.praktijk-actions .btn-secondary:hover,
+.praktijk-actions a.btn-secondary:hover,
+.praktijk-actions button.btn-secondary:hover {
+  background: linear-gradient(135deg, #3a8a8a, #4A9B9B) !important;
+  color: white !important;
+  text-decoration: none !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Custom Map Markers */
 .custom-marker .marker-pin {
-  width: 24px;
+  width: 30px;
   height: 30px;
-  background: linear-gradient(135deg, #7CB342, #689F38);
+  background: linear-gradient(135deg, var(--accent-color), #689f38);
   border-radius: 50% 50% 50% 0;
-  position: relative;
   transform: rotate(-45deg);
-  border: 2px solid #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  border: 3px solid white;
+  box-shadow: var(--shadow);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -155,271 +346,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .custom-marker .marker-pin i {
   color: white;
-  font-size: 12px;
-  transform: rotate(45deg);
-  margin-top: -2px;
-}
-
-/* Popup styling met logo */
-.popup-content {
-  min-width: 220px;
-}
-
-.popup-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-  gap: 10px;
-}
-
-.popup-logo {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  border-radius: 6px;
-  border: 1px solid #e1e8ed;
-  background: white;
-  padding: 2px;
-  flex-shrink: 0;
-}
-
-.popup-logo-placeholder {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #7CB342, #689F38);
-  color: white;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: bold;
-  flex-shrink: 0;
-}
-
-.popup-info {
-  flex: 1;
-}
-
-.popup-content h4 {
-  margin: 0 0 4px 0;
-  color: #2E5A87;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-.popup-regio {
-  margin: 0 !important;
-  color: #666;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.popup-content p {
-  margin: 6px 0;
-  font-size: 12px;
-  line-height: 1.3;
-}
-
-.popup-link {
-  display: inline-flex;
-  align-items: center;
-  margin-top: 10px;
-  padding: 6px 10px;
-  background: linear-gradient(135deg, #4A9B9B, #3A8A8A);
-  color: white !important;
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.popup-link:hover {
-  background: linear-gradient(135deg, #2E5A87, #1E4A77);
-  transform: translateY(-1px);
-}
-
-.popup-link i {
-  margin-right: 4px;
-  font-size: 10px;
-}
-
-/* Praktijken grid */
-.praktijken-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
-}
-
-/* Scrollbar styling */
-.praktijken-grid::-webkit-scrollbar {
-  width: 6px;
-}
-
-.praktijken-grid::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 3px;
-}
-
-.praktijken-grid::-webkit-scrollbar-thumb {
-  background: #7CB342;
-  border-radius: 3px;
-}
-
-.praktijken-grid::-webkit-scrollbar-thumb:hover {
-  background: #689F38;
-}
-
-/* Praktijk kaarten */
-.praktijk-card {
-  background: white;
-  border-radius: 12px;
-  border: 1px solid #e1e8ed;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
-  overflow: hidden;
-  height: 130px;
-  display: flex;
-  flex-direction: column;
-}
-
-.praktijk-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-  border-color: #7CB342;
-}
-
-/* Praktijk header */
-.praktijk-header {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem;
-  border-bottom: 1px solid #f0f0f0;
-  flex-shrink: 0;
-  height: 55px;
-}
-
-.praktijk-logo {
-  width: 30px;
-  height: 30px;
-  margin-right: 8px;
-  flex-shrink: 0;
-}
-
-.praktijk-logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 8px;
-  border: 1px solid #e1e8ed;
-}
-
-.praktijk-placeholder {
-  width: 30px;
-  height: 30px;
-  background: linear-gradient(135deg, #7CB342, #689F38);
-  color: white;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 14px;
-  font-weight: bold;
+  transform: rotate(45deg);
 }
 
-.praktijk-title h3 {
-  margin: 0 0 2px 0;
-  font-size: 12px;
-  font-weight: 600;
-  color: #2E5A87;
-  line-height: 1.1;
-}
-
-.praktijk-title .regio {
-  margin: 0;
-  font-size: 10px;
-  color: #666;
-  font-weight: 500;
-}
-
-/* Praktijk details */
-.praktijk-details {
-  padding: 0.3rem 0.5rem;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  height: 35px;
-}
-
-.praktijk-details p {
-  margin: 3px 0;
-  font-size: 12px;
-  line-height: 1.3;
-}
-
-.praktijk-details .specialisatie {
-  color: #4A9B9B;
-  font-weight: 600;
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
-
-.praktijk-details .beschrijving {
-  color: #666;
-}
-
-/* Praktijk acties */
-.praktijk-actions {
-  padding: 0.3rem 0.5rem 0.5rem 0.5rem;
-  flex-shrink: 0;
-  height: 40px;
-  display: flex;
-  align-items: center;
-}
-
-.praktijk-link {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 8px;
-  background: linear-gradient(135deg, #4A9B9B, #3A8A8A);
-  color: white !important;
-  text-decoration: none;
-  border-radius: 3px;
-  font-size: 9px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.praktijk-link:hover {
-  background: linear-gradient(135deg, #2E5A87, #1E4A77);
-  transform: translateY(-1px);
-}
-
-.praktijk-link i {
-  margin-right: 3px;
-  font-size: 8px;
-}
-
-/* Responsive design */
+/* Responsive Design */
 @media (max-width: 768px) {
-  .praktijken-container {
-    margin: 1rem;
-    max-width: none;
-  }
-  
   .praktijken-grid {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
   
   .drenthe-kaart {
     height: 350px;
   }
   
-  .kaart-sectie {
-    margin-bottom: 2rem;
+  .praktijk-card {
+    padding: 0.75rem;
   }
 }
 
@@ -435,13 +378,4 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 }
 
-/* Sectie headers */
-.kaart-sectie h2,
-.praktijken-sectie h2 {
-  color: #2E5A87;
-  font-size: 24px;
-  margin-bottom: 1rem;
-  font-weight: 600;
-  text-align: center;
-}
 </style>

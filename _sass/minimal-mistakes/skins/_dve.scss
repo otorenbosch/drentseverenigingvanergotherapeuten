@@ -18,7 +18,7 @@ $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
   background-color: #2E5A87 !important;
   border-bottom: 1px solid darken(#2E5A87, 10%);
   margin-bottom: 0 !important;
-  padding: 1em 0 !important;
+  padding: 0.25em 0 !important; // Minimale padding voor zeer compacte header
   
   .site-title a {
     color: #fff !important;
@@ -52,7 +52,7 @@ $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
 
 // Logo styling - alleen logo tonen
 .site-logo img {
-  max-height: 80px !important;
+  max-height: 100px !important; // Groter logo voor desktop
   width: auto !important;
 }
 
@@ -68,10 +68,66 @@ $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
 }
 
 /* ==========================================================================
+   Desktop Layout Improvements
+   ========================================================================== */
+
+// Verbeter content breedte voor desktop
+#main {
+  @media (min-width: 80em) {
+    max-width: 1400px !important; // Breder dan standaard 1280px
+  }
+  
+  @media (min-width: 120em) {
+    max-width: 1600px !important; // Nog breder voor zeer grote schermen
+  }
+}
+
+.masthead__inner-wrap {
+  @media (min-width: 80em) {
+    max-width: 1400px !important;
+  }
+  
+  @media (min-width: 120em) {
+    max-width: 1600px !important;
+  }
+}
+
+.page__footer footer {
+  @media (min-width: 80em) {
+    max-width: 1400px !important;
+  }
+  
+  @media (min-width: 120em) {
+    max-width: 1600px !important;
+  }
+}
+
+// Breder content gebied
+.page {
+  @media (min-width: 64em) {
+    width: calc(100% - 200px) !important;
+  }
+  
+  @media (min-width: 80em) {
+    width: calc(100% - 250px) !important; // Meer ruimte voor content
+  }
+}
+
+.archive {
+  @media (min-width: 64em) {
+    width: calc(100% - 200px) !important;
+  }
+  
+  @media (min-width: 80em) {
+    width: calc(100% - 250px) !important;
+  }
+}
+
+/* ==========================================================================
    Mobile Navigation Fixes
    ========================================================================== */
 
-// Zorg dat toggle button zichtbaar is op mobiel
+// Zorg dat menu altijd zichtbaar is op desktop
 .greedy-nav__toggle {
   display: none;
   background: transparent !important;
@@ -102,6 +158,14 @@ $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
   }
 }
 
+// Zorg dat menu links altijd zichtbaar zijn op desktop
+.greedy-nav .visible-links {
+  @media (min-width: 768px) {
+    display: flex !important;
+    overflow: visible !important;
+  }
+}
+
 // Hidden links styling
 .greedy-nav .hidden-links {
   background: #2E5A87 !important;
@@ -124,10 +188,10 @@ $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
   }
 }
 
-// Responsive breakpoints
-@media (max-width: 768px) {
+// Responsive breakpoints - alleen menu toggle op kleine schermen
+@media (max-width: 767px) {
   .masthead .site-logo img {
-    max-height: 60px !important;
+    max-height: 70px !important; // Ook iets groter op tablet
   }
   
   .greedy-nav__toggle {
@@ -137,10 +201,91 @@ $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
 
 @media (max-width: 480px) {
   .masthead {
-    padding: 0.75em 0 !important;
+    padding: 0.2em 0 !important; // Minimale padding op mobiel
   }
   
   .masthead .site-logo img {
-    max-height: 50px !important;
+    max-height: 60px !important; // Ook iets groter op mobiel
+  }
+}
+
+/* ==========================================================================
+   Content Styling Improvements
+   ========================================================================== */
+
+// Verbeterde typografie en spacing
+.page__content {
+  h1, h2, h3, h4, h5, h6 {
+    color: $primary-color;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    line-height: 1.3;
+  }
+  
+  h1 {
+    font-size: 1.8em;
+    margin-top: 1em;
+    border-bottom: 3px solid $primary-color;
+    padding-bottom: 0.5em;
+  }
+  
+  h2 {
+    font-size: 1.4em;
+    border-bottom: 2px solid lighten($primary-color, 30%);
+    padding-bottom: 0.3em;
+  }
+  
+  h3 {
+    font-size: 1.2em;
+    color: lighten($primary-color, 10%);
+  }
+  
+  p {
+    margin-bottom: 1.5em;
+    line-height: 1.7;
+    font-size: 1.1em;
+  }
+  
+  // Verbeterd citaat/motto styling
+  p em:only-child {
+    display: block;
+    text-align: center;
+    font-size: 1.3em;
+    color: $link-color;
+    font-weight: 500;
+    margin: 2em 0;
+    padding: 1.5em;
+    background: linear-gradient(135deg, rgba(46, 90, 135, 0.05), rgba(74, 155, 155, 0.05));
+    border-left: 4px solid $link-color;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+  }
+  
+  // Betere lijst styling
+  ul, ol {
+    margin-bottom: 1.5em;
+    
+    li {
+      margin-bottom: 0.8em;
+      line-height: 1.6;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// Betere link styling
+.page__content a:not(.btn) {
+  color: $link-color;
+  text-decoration: none;
+  border-bottom: 1px dotted $link-color;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    color: darken($link-color, 15%);
+    border-bottom: 1px solid darken($link-color, 15%);
+    text-decoration: none;
   }
 }
